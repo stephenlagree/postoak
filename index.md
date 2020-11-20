@@ -3,7 +3,7 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
-profile_picture:
-  src: /assets/img/super.jpg
-  alt: Image of a logger in alternate world
 ---
+Custom cloud solutions for your business.
+
+<img src="/assets/img/super.jpg" alt="Image of a logger in alternate world"> 
