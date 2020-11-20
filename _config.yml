@@ -23,7 +23,7 @@ email: lagree@fastmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   We develop custom software for analytics, infrastructure, and communication.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://postoak.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 
@@ -37,7 +37,7 @@ header:
     - name: Home
       slug: /     # <-- index.md
     - name: Blog  # <-- blog.md
-    - name: About  # <-- whatever.md
+    - name: About  # <-- about.md
 
 footer:
   show_powered_by: false
