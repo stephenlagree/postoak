@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Post Oak Software
-email: lagree@fastmail.com
+email: stephen@postoak.io
 description: >- # this means to ignore newlines until "baseurl:"
   We develop custom software for analytics, infrastructure, and communication.
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -43,8 +43,8 @@ footer:
   show_powered_by: false
   contact:
     - name: Email
-      value: lagree@fastmail.com
-      link: mailto:lagree@fastmail.com
+      value: stephen@postoak.io
+      link: mailto:stephen@postoak.io
   follow:
     - name: LinkedIn
       link: http://linkedin.com/in/slagree
