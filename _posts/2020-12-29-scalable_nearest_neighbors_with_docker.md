@@ -19,7 +19,7 @@ Traditional nearest neighbors searches traverse through all potential target obj
 These algorithms can take a fraction of the time as exact nearest neighbors.  Since they do this by approximating distance, the approximation is part art, and there are many different heuristics and parameters that can be tweaked.  Usually there are two or three steps in the algorithm that include building a representation or summary of the targets and the search step.  Because of this, there is a lot of work on improving ANN algorithms.  There are many different implementations of ANN methods, such as Spotify's ANNOY, Facebook's FAISS, and released this past summer, Google's ScaNN.  
 
 <span class="caption">
-![]( http://ann-benchmarks.com/glove-100-angular_10_angular.png)
+![]( https://ann-benchmarks.com/glove-100-angular_10_angular.png)
 Performance of several leading ANN methods on one dataset. See [ANN Benchmarks][5] for a variety of datasets.
 </span>
 
