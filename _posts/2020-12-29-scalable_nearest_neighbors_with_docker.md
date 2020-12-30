@@ -37,7 +37,8 @@ People familiar with machine learning are aware that distance metrics are very i
 
 Depending on your task you can prioritize objects based on a metric you define.  During my work at MathWorks I worked on the parallel implementation of distance functions, which sped up the distance functions and also the downstream clustering and machine learning algorithms that used them.
 
-For some applications, exact distance is not as important as finding something nearby.  ANN methods are used for solving this type of problem.  Google search is a good example of an application like this.  Most people don't care whether the result they are looking for is in position 1 or position 5 in the Google results as long as they can find what they are looking for.  Many times, results after the first page don't matter at all.  And search can be very computationally expensive. It is impossible to search everything on the internet instantaneously.  So approximate nearest neighbors work focuses on <b>algorithms that prioritize speed with <i>approximate</i> accuracy</b>.  
+For some applications, exact distance is not as important as finding something nearby.  ANN methods are used for solving this type of problem.  Google search is a good example of an application like this.  Most people don't care whether the result they are looking for is in position 1 or position 5 in the Google results as long as they can find what they are looking for.  
+Many times, results after the first page don't matter at all.  Search can be very computationally expensive and it is impossible to search everything on the internet instantaneously, so speed is often preferable to rigidly conforming to an exact distance metric that may not have a direct meaning to users.  Because of this, approximate nearest neighbors work focuses on <b>algorithms that prioritize speed with <i>approximate</i> accuracy</b>.  
 
 <h3>Approximate Nearest Neighbors Heuristics</h3>
 
