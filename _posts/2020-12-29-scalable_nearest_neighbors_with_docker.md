@@ -7,7 +7,7 @@ published: true
 ---
 <h3> Intro to ScaNN and Approximate Nearest Neighbors</h3>
 
-For a recent project, I looked into Google's ScaNN (Scalable Nearest Neighbors) algorithm.  It is an algorithm that came out of Google Research that can be used for many applications, including search and machine learning.  In this blog post, I want to give a bit of motivation for using ScaNN and other Approximate Nearest Neighbors (ANN) methods without going into the math, and then give you the docker configuration and commands you need to get it up and running and try it out yourself.
+For a recent project, I looked into Google's [ScaNN (Scalable Nearest Neighbors)][1] algorithm.  It is an algorithm that came out of Google Research that can be used for many applications, including search and machine learning.  In this blog post, I want to give a bit of motivation for using ScaNN and other Approximate Nearest Neighbors (ANN) methods without going into the math, and then give you the docker configuration and commands you need to get it up and running and try it out yourself.
 
 
 <b>Nearest Neighbors</b> algorithms are used to search for objects (vectors) that are near to a query object.  
@@ -16,10 +16,10 @@ Traditional nearest neighbors searches traverse through all potential target obj
 
 <h3>Performance benefits</h3>
 
-These algorithms can take a fraction of the time as exact nearest neighbors.  Since they do this by approximating distance, the approximation is part art, and there are many different heuristics and parameters that can be tweaked.  Usually there are two or three steps in the algorithm that include building a representation or summary of the targets and the search step.  Because of this, there is a lot of work on improving ANN algorithms.  There are many different implementations of ANN methods, such as Spotify's ANNOY, Facebook's FAISS, and released this past summer, Google's ScaNN.  
+Approximate nearest neighbors algorithms can take a fraction of the time as exact nearest neighbors.  Since they do this by approximating distance, the approximation is part art, and there are many different heuristics and parameters that can be tweaked.  Usually there are two or three steps in the algorithm that include building a representation or summary of the targets and the search step.  Because of this, there is a lot of ongoing research work on additional improvements to ANN algorithms.  There are many different implementations of ANN methods, such as Spotify's <a href="https://github.com/spotify/annoy">ANNOY (Approximate Nearest Neighbors Oh Yeah)</a>, Facebook's <a href="https://engineering.fb.com/2017/03/29/data-infrastructure/faiss-a-library-for-efficient-similarity-search/">FAISS (Facebook AI Similarity Search)</a>, and released this past summer, Google's ScaNN (Scalable Nearest Neighbors).  
 
 <span class="caption">
-![]( https://ann-benchmarks.com/glove-100-angular_10_angular.png)
+![](https://images.weserv.nl/?url=ann-benchmarks.com/glove-100-angular_10_angular.png)
 Performance of several leading ANN methods on one dataset. See [ANN Benchmarks][5] for a variety of datasets.
 </span>
 
@@ -28,7 +28,7 @@ This diagram shows performance of several leading ANN methods, with ScaNN perfor
 <h3> Approximate Nearest Neighbors and Distance Metrics </h3>
 
 
-People familiar with machine learning are aware that distance metrics are very important in machine learning.  They are used to show the difference between vector representations.  Different distance metrics can be used to show the distance between objects in different spaces such as Euclidean space or normed vector spaces.  
+People familiar with machine learning are aware that distance metrics are very important in machine learning.  Distance metrics are used to show a numerical difference between vector representations.  Different distance metrics can be used to show the distance between objects in different spaces such as Euclidean space or normed vector spaces.  
 
 <span class="caption">
 ![](https://iq.opengenus.org/content/images/2018/12/distance.jpg)
@@ -54,7 +54,7 @@ Another performance optimization is to precompute the distance between documents
 ![](https://www.jeremyjordan.me/content/images/2019/01/Screen-Shot-2019-01-29-at-11.30.19-PM.png)
 Quantization error is the difference between the centroid and the vector. [Source][6].</span>
 
-This can be tricky because the directions of the distances can be different, making the distance approximation further off.  Orthogonal distances can lead to more error in the approximation. 
+Reconciling the distances between the query and quantizer and between the target and quantizer can be tricky because the directions of the distances can be different, making the distance approximation further off.  Orthogonal distances can lead to more error in the approximation. 
 
 <span class="caption">
 <img src="https://1.bp.blogspot.com/-0HxtiXvnyTU/Xx8xNOgfUSI/AAAAAAAAGRc/Vgf0gK50N9cIG1aA9TWFLx7nqAYwuP5TQCLcBGAsYHQ/s640/image2.png">
