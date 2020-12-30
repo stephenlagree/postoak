@@ -20,7 +20,7 @@ Approximate nearest neighbors algorithms can take a fraction of the time as exac
 
 <span class="caption">
 ![](https://images.weserv.nl/?url=ann-benchmarks.com/glove-100-angular_10_angular.png)
-Performance of several leading ANN methods on one dataset. See [ANN Benchmarks][5] for a variety of datasets.
+*Performance of several leading ANN methods on one dataset. See [ANN Benchmarks][5] for a variety of datasets.*
 </span>
 
 This diagram shows performance of several leading ANN methods, with ScaNN performing well on this dataset. There are a lot of considerations to take into account when choosing an ANN algorithm, including speed, recall, distance calculation trade-offs depending on your application, API language availability, and maturity of code.
@@ -46,26 +46,27 @@ There are many ways of doing this with heuristics involved at multiple steps.  T
 
 <span class="caption">
 ![](https://www.jeremyjordan.me/content/images/2019/01/Screen-Shot-2019-01-29-at-11.29.48-PM.png)
-Quantizers and data vectors. [Source][6].
+*Quantizers and data vectors. [Source][6].*
 </span>
 
 Another performance optimization is to precompute the distance between documents and their centroids and only compare the query document to the centroids directly.  Then a combination of the distance between the query and the centroid and the centroid and the target can be used to approximate the total distance.  This may or may not be followed by a re-ranking of top candidates to calculate the exact distances, depending on your priority for performance or accuracy.
 
 <span class="caption">
 ![](https://www.jeremyjordan.me/content/images/2019/01/Screen-Shot-2019-01-29-at-11.30.19-PM.png)
-Quantization error is the difference between the centroid and the vector. [Source][6].</span>
+*Quantization error is the difference between the centroid and the vector. [Source][6].*
+</span>
 
 Reconciling the distances between the query and quantizer and between the target and quantizer can be tricky because the directions of the distances can be different, making the distance approximation further off.  Orthogonal distances can lead to more error in the approximation. 
 
 <span class="caption">
 <img src="https://1.bp.blogspot.com/-0HxtiXvnyTU/Xx8xNOgfUSI/AAAAAAAAGRc/Vgf0gK50N9cIG1aA9TWFLx7nqAYwuP5TQCLcBGAsYHQ/s640/image2.png">
- [Source][1]<br>
+ *[Source][1]*<br>
 </span>
 Google uses an approach that weights the distances in parallel and orthogonal directions differently to account for this orthogonality.
 
 <span class="caption">
 <img src="https://1.bp.blogspot.com/-l4VY-q1YcEE/XxsvREuIEvI/AAAAAAAAGQs/zzJNUHTZ9SU8LtKzm2rgl0oQCuiJ9fhIwCLcBGAsYHQ/s640/image1.png">
-[Source][1]<br>
+*[Source][1]*<br>
 </span>
 
 I will leave the details to the Google blog post and ICML paper (referenced below) and demonstrate how to get it up and running with your code.
