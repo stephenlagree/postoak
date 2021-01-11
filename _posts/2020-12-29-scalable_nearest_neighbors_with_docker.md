@@ -1,18 +1,20 @@
 ---
 layout: post
-title:  "Trying out Google's Scalable Nearest Neighbors with Docker"
+title:  "Setting up Google's Scalable Nearest Neighbors with Docker"
 date:   2020-12-29 00:00:00 -0800
 categories: scann ai ml
 published: true
 ---
 <h3> Intro to ScaNN and Approximate Nearest Neighbors</h3>
 
-For a recent project, I looked into Google's [ScaNN (Scalable Nearest Neighbors)][1] algorithm.  It is an algorithm that came out of Google Research that can be used for many applications, including search and machine learning.  In this blog post, I want to give a bit of motivation for using ScaNN and other Approximate Nearest Neighbors (ANN) methods without going into the math, and then give you the docker configuration and commands you need to get it up and running and try it out yourself.
+For a recent project, I used Google's [ScaNN (Scalable Nearest Neighbors)][1] algorithm.  It is an algorithm that came out of Google Research that can be used for many applications, including search and machine learning.  In this blog post, I give a bit of motivation for using ScaNN and other Approximate Nearest Neighbors (ANN) methods without going into the math, and then give you the docker configuration and commands you need to get it up and running and try it out yourself.
 
 
 <b>Nearest Neighbors</b> algorithms are used to search for objects (vectors) that are near to a query object.  
 
-Traditional nearest neighbors searches traverse through all potential target objects and calculate the exact distance to find the closest objects.  <b>Approximate nearest neighbors algorithms seek to approximate this distance in a performant way to be used in online machine learning or search systems.</b>  This can be used for recommendation systems or other applications where exact distance or order is not necessary.  
+Traditional nearest neighbors searches traverse through all potential target objects and calculate the exact distance to find the closest objects. Modern implementations of nearest neighbors use KDTree and Ball Tree data structures to perform a search, that perform significantly better than brute force nearest neighbors. A <a href="https://en.wikipedia.org/wiki/K-d_tree">KD Tree</a> is a K dimensional tree that partitions the vector space into a tree, reducing the complexity of searching for a vector from O(n) to O(log n). A <a href="https://en.wikipedia.org/wiki/Ball_tree">Ball Tree</a> is also a tree based data structure used for KNN search, but it partitions the data into hyperspheres rather than splitting based on hyperplanes.  It can search for data with complexity of O(n log n), but creating the data structure to search can be time intensive. However, when N becomes millions or billions, even these time complexities can be too slow. ANN methods can bring the runtime complexity to O(1), while sacrificing some result accuracy. 
+
+<b>Approximate nearest neighbors algorithms seek to approximate this distance in a performant way to be used in online machine learning or search systems.</b>  This can be used for recommendation systems or other applications where exact distance or order is not necessary.  
 
 <h3>Performance benefits</h3>
 
@@ -28,14 +30,14 @@ This diagram shows performance of several leading ANN methods, with ScaNN perfor
 <h3> Approximate Nearest Neighbors and Distance Metrics </h3>
 
 
-People familiar with machine learning are aware that distance metrics are very important in machine learning.  Distance metrics are used to show a numerical difference between vector representations.  Different distance metrics can be used to show the distance between objects in different spaces such as Euclidean space or normed vector spaces.  
+In machine learning, it is vital to use the right distance metric to represent the difference between the objects you are representing.  Different distance metrics can be used to show the distance between objects in different spaces such as Euclidean space or normed vector spaces.  
 
 <span class="caption">
 ![](https://iq.opengenus.org/content/images/2018/12/distance.jpg)
 *Visualization of differences between Euclidean, Manhattan, and Chebyshev distance. [Source][3]*
 </span>
 
-Depending on your task you can prioritize objects based on a metric you define.  During my work at MathWorks I worked on the parallel implementation of distance functions, which sped up the distance functions and also the downstream clustering and machine learning algorithms that used them.
+Depending on your task you can prioritize objects based on a metric you define.  During my work at MathWorks I worked on the parallel implementation of distance functions, which sped up their computation and also the downstream clustering and machine learning algorithms that used them.
 
 For some applications, exact distance is not as important as finding something nearby.  ANN methods are used for solving this type of problem.  Google search is a good example of an application like this.  Most people don't care whether the result they are looking for is in position 1 or position 5 in the Google results as long as they can find what they are looking for.  
 Many times, results after the first page don't matter at all.  Search can be very computationally expensive and it is impossible to search everything on the internet instantaneously, so speed is often preferable to rigidly conforming to an exact distance metric that may not have a direct meaning to users.  Because of this, approximate nearest neighbors work focuses on <b>algorithms that prioritize speed with <i>approximate</i> accuracy</b>.  
@@ -72,7 +74,7 @@ Google uses an approach that weights the distances in parallel and orthogonal di
 I will leave the details to the Google blog post and ICML paper (referenced below) and demonstrate how to get it up and running with your code.
 
 <h2>Trying out ScaNN on Docker</h2>
-ScaNN was released as a python library.  Since ScaNN is research code, they are not releasing binaries for every operating system and distribution.  The first release was source and a ubuntu binary, but they since added a manylinux wheel expanding the linux distributions supported which made it easier to run.  It is possible to use the library in Linux or get the source working on MacOS<reference>, but I prefer to run it in docker so that my configuration is consistent across any operating system running Docker.
+ScaNN was released as a python library.  Since ScaNN is research code, they are not releasing binaries for every operating system and distribution.  The first release was source and a ubuntu binary, but they since added a manylinux wheel expanding the linux distributions supported which made it easier to run.  It is possible to use the library in Linux or MacOS directly, but I prefer to run it in Docker for consistency across operating systems.
 
 To use the steps below you will need to first <a href="https://docs.docker.com/get-docker/">install docker.</a>
 
@@ -93,7 +95,7 @@ Here is my docker image definition.  Save the following in a file name `Dockerfi
 	ADD example.py /
 	CMD [ "python3.7", "example.py" ]
 
-The `example.py` I used above is created from the python code from ScaNN's <a href="https://github.com/google-research/google-research/blob/master/scann/docs/example.ipynb">example Jupiter script</a>, in order to test it out.
+The `example.py` used on the last line of the Dockerfile was made from the python code from ScaNN's <a href="https://github.com/google-research/google-research/blob/master/scann/docs/example.ipynb">example Jupiter script</a>, in order to test it out.
 
 You can download the files <a href="https://github.com/stephenlagree/scann-dockerfile">here.</a>
 <h3>2. Build your docker image</h3>
@@ -108,7 +110,7 @@ You can run the image you built with the following command:
 
 `docker run --rm --name scann scann_image`
 
-This command will run the image and remove the image after executing.
+This will run the image and automatically remove it after executing.
 
 You can mount a local directory on your computer into the docker image using the -v option `-v <local dir>:<docker mount path>`
 
