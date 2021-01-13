@@ -96,7 +96,7 @@ Here is my docker image definition.  Save the following in a file name `Dockerfi
     ADD example.py /
     CMD [ "python3.7", "example.py" ]
 
-The `example.py` used on the last line of the Dockerfile was made from the python code from ScaNN's <a href="https://github.com/google-research/google-research/blob/master/scann/docs/example.ipynb">example Jupiter script</a>, in order to test it out.
+The `example.py` used on the last line of the Dockerfile was made from the python code from ScaNN's <a href="https://github.com/google-research/google-research/blob/master/scann/docs/example.ipynb">example Jupyter script</a>, in order to test it out.
 
 You can download the files in this step <a href="https://github.com/stephenlagree/scann-dockerfile">here.</a>
 <h3>2. Build your docker image</h3>
