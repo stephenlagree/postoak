@@ -183,4 +183,39 @@ div.footnotes { font-size: 80%; }
 
 h1.not-found-title { margin: 30px 0; font-size: 4em; line-height: 1; letter-spacing: -1px; }
 
+.ad {
+  background-color: #02A9E8;
+  border-radius: 10px;
+  display: flex;
+  margin: auto;
+  max-width: 480px;
+  padding: 20px 0;
+}
+
+.ad p {
+    color: white;
+    margin: 5px;
+  }
+.ad  a{
+    color: white;
+    text-decoration: underline;
+  }
+
+.ad-column-left {
+  max-width: 68%;
+  border-right: 1px solid #BBBBBB;
+  padding: 0 15px 0 20px;
+}
+.ad-column-right {
+  display: flex;
+  flex: 25%;
+  justify-content: center;
+  align-items: center;
+
+  @include mobile {
+    display: block;
+    width: 100%;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */
