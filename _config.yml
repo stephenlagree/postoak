@@ -32,10 +32,15 @@ theme: bay_jekyll_theme
 plugins:
   - jekyll-feed
 
+# Custom includes
+head_custom: head-custom.html
+
 header:
   pages:
     - name: Home
       slug: /     # <-- index.md
+    - name: Portfolio  # <-- portfolio.md
+      slug: /portfolio
     - name: Blog  # <-- blog.md
     - name: About  # <-- about.md
 
